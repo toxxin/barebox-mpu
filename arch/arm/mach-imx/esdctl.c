@@ -318,7 +318,7 @@ static __maybe_unused struct imx_esdctl_data imx1_data = {
 static __maybe_unused struct imx_esdctl_data imx25_data = {
 	.base0 = MX25_CSD0_BASE_ADDR,
 	.base1 = MX25_CSD1_BASE_ADDR,
-	.add_mem = imx_esdctl_v2_add_mem,
+	.add_mem = imx_esdctl_v2_bug_add_mem,
 };
 
 static __maybe_unused struct imx_esdctl_data imx27_data = {
@@ -477,6 +477,8 @@ void __naked __noreturn imx1_barebox_entry(void *boarddata)
 void __naked __noreturn imx25_barebox_entry(void *boarddata)
 {
 	unsigned long base, size;
+
+	imx_esdctl_v2_disable_default((void *)MX25_ESDCTL_BASE_ADDR);
 
 	upper_or_coalesced_range(MX25_CSD0_BASE_ADDR,
 			imx_v2_sdram_size((void *)MX25_ESDCTL_BASE_ADDR, 0),
