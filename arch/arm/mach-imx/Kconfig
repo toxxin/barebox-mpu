@@ -8,7 +8,8 @@ config ARCH_TEXT_BASE
 	default 0x97f00000 if MACH_EUKREA_CPUIMX51SD
 	default 0xc0000000 if MACH_IMX21ADS
 	default 0xa0000000 if MACH_IMX27ADS
-	default 0x83f00000 if MACH_FREESCALE_MX25_3STACK && FREESCALE_MX25_3STACK_SDRAM_64MB_DDR2
+	default 0x83f00000 if MACH_FREESCALE_MX25_3STACK && (FREESCALE_MX25_3STACK_SDRAM_64MB_DDR2 || CONFIG_FREESCALE_MX25_3STACK_SDRAM_32MB_SDRAM)
+	default 0x83f00000 if MACH_SIPOWER_MX25_MPU
 	default 0x87f00000 if MACH_FREESCALE_MX25_3STACK && FREESCALE_MX25_3STACK_SDRAM_128MB_MDDR
 	default 0x87f00000 if MACH_FREESCALE_MX35_3STACK
 	default 0xa7f00000 if MACH_PCA100
@@ -370,6 +371,13 @@ config MACH_FREESCALE_MX25_3STACK
 	  Say Y here if you are using the Freescale MX25 3stack board equipped
 	  with a Freescale i.MX25 Processor
 
+config MACH_SIPOWER_MX25_MPU
+	bool "Sipower MX25 mpu"
+	select ARCH_IMX25
+	help
+	  Say Y here if you are using the MPU family boards equipped with
+	  a Freescale i.MX25 Processor
+
 # ----------------------------------------------------------
 
 comment "i.MX27 Boards"
@@ -590,6 +598,20 @@ config FREESCALE_MX25_3STACK_SDRAM_64MB_DDR2
 	bool "64 MB (DDR2)"
 config FREESCALE_MX25_3STACK_SDRAM_128MB_MDDR
 	bool "128 MB (mDDR)"
+config FREESCALE_MX25_3STACK_SDRAM_32MB_SDRAM
+    bool "32 MB (SDR SDRAM)"
+endchoice
+
+endif
+
+if MACH_SIPOWER_MX25_MPU
+
+choice
+	prompt "SDRAM Type"
+config SIPOWER_MX25_MPU_SDRAM_16MB_SDRAM
+	bool "16 MB (SDR SDRAM)"
+config SIPOWER_MX25_MPU_SDRAM_32MB_SDRAM
+	bool "32 MB (SDR SDRAM)"
 endchoice
 
 endif

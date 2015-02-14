@@ -124,3 +124,4 @@ obj-$(CONFIG_MACH_VEXPRESS)			+= vexpress/
 obj-$(CONFIG_MACH_VIRT2REAL)			+= virt2real/
 obj-$(CONFIG_MACH_ZEDBOARD)			+= avnet-zedboard/
 obj-$(CONFIG_MACH_VARISCITE_MX6)		+= variscite-mx6/
+obj-$(CONFIG_MACH_SIPOWER_MX25_MPU) 		+= sipower-mpu/
