@@ -4,13 +4,10 @@
 kernel=net
 root=net
 
-uimage=uImage
+uimage=uImage-333
 jffs2=root-pcm043.jffs2
 
 autoboot_timeout=3
-
-nfsroot="/ptx/work/octopus/rsc/svn/oselas/bsp/phytec/phyCORE-i.MX27/OSELAS.BSP-Phytec-phyCORE-i.MX27-trunk/root"
-bootargs="console=ttymxc0,115200 noinitrd loglevel=8 mtdparts=spi0.0:128k(barebox),2560k(kernel),13696k(rootfs),16256k@128k(firware) vt.global_cursor_default=0 root=/dev/mtdblock2"
 
 # use 'dhcp' to do dhcp in barebox and in kernel
 #ip=dhcp

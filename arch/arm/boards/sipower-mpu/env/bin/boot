@@ -31,14 +31,12 @@ else
 	bootargs="$bootargs root=/dev/nfs nfsroot=$eth0.serverip:$nfsroot,v3,tcp"
 fi
 
-bootargs="$bootargs mtdparts=physmap-flash.0:$nor_parts;mxc_nand:$nand_parts"
-
 if [ $kernel = net ]; then
 	if [ x$ip = xdhcp ]; then
 		dhcp
 	fi
-	tftp $uimage uImage || exit 1
-	bootm uImage
+	tftp $uimage uImage-333 || exit 1
+	bootm uImage-333
 elif [ $kernel = nor ]; then
 	bootm /dev/nor0.kernel
 else
