@@ -118,8 +118,8 @@ static iomux_v3_cfg_t imx25_pads[] = {
 	MX25_PAD_FEC_TDATA1__FEC_TDATA1,
 	MX25_PAD_FEC_TX_CLK__FEC_TX_CLK,
 	MX25_PAD_FEC_TX_EN__FEC_TX_EN,
-    MX25_PAD_A18__FEC_COL,
-    MX25_PAD_A19__FEC_RX_ER,
+	MX25_PAD_A18__FEC_COL,
+	MX25_PAD_A19__FEC_RX_ER,
 	MX25_PAD_POWER_FAIL__POWER_FAIL,
 	MX25_PAD_A17__GPIO_2_3,
 	MX25_PAD_D12__GPIO_4_8,
@@ -146,13 +146,14 @@ static iomux_v3_cfg_t imx25_pads[] = {
 	/* i2c */
 	MX25_PAD_I2C1_CLK__I2C1_CLK,
 	MX25_PAD_I2C1_DAT__I2C1_DAT,
-    /* spi */
-    /* do not use hardware cs support, treat as gpio */
-    MX25_PAD_CSPI1_SS0__GPIO_1_16,
-    MX25_PAD_CSPI1_SS1__GPIO_1_17,
-    MX25_PAD_CSPI1_SCLK__CSPI1_SCLK,
-    /* spi bus 3 */
-    MX25_PAD_CSI_D6__GPIO_1_31,
+	/* spi1 */
+	MX25_PAD_CSPI1_MOSI__CSPI1_MOSI,
+	MX25_PAD_CSPI1_MISO__CSPI1_MISO,
+	MX25_PAD_CSPI1_SCLK__CSPI1_SCLK,
+	MX25_PAD_CSPI1_RDY__CSPI1_RDY,
+	/* do not use hardware cs support, treat as gpio */
+	MX25_PAD_CSPI1_SS0__GPIO_1_16,
+	MX25_PAD_CSPI1_SS1__GPIO_1_17,
 };
 
 static int imx25_console_init(void)
