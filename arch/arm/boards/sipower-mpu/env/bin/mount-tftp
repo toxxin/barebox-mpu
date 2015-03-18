@@ -1,0 +1,3 @@
+#!/bin/sh
+ifup eth0
+mount $eth0.serverip tftp /mnt/tftp
