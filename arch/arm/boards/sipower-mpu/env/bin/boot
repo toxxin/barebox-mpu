@@ -2,6 +2,16 @@
 
 . /env/config
 
+#imx_iim0.permanent_write_enable=1
+#mw -b -d /dev/imx_iim_bank0 0x04 0x09
+#mw -b -d /dev/imx_iim_bank0 0x05 0x6e
+#memcpy -b -s /dev/at25x0 -d /dev/imx_iim_bank0 0xfa 0x1a 6
+#imx_iim0.permanent_write_enable=0
+
+#erase /dev/m25p0
+#memcpy -d /dev/m25p0 0x80800000 0 8M
+#reset
+
 if [ x$1 = xnand ]; then
 	root=nand
 	kernel=nand
