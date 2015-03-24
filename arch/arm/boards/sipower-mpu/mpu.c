@@ -32,6 +32,8 @@
 #include <mach/imx-nand.h>
 #include <fec.h>
 #include <nand.h>
+#include <spi/spi.h>
+#include <spi/eeprom.h>
 #include <mach/imx-flash-header.h>
 #include <mach/iomux-mx25.h>
 #include <mach/generic.h>
@@ -53,6 +55,44 @@ struct imx_nand_platform_data nand_info = {
 	.hw_ecc	= 1,
 };
 
+static struct spi_eeprom at25_data = {
+	.name = "at25x0",
+	.page_size = 16,
+	.flags = EE_ADDR1 | EE_READONLY,
+	.size = 256,
+};
+
+static int spi_0_cs[] = {
+	IMX_GPIO_NR(1, 16),
+	IMX_GPIO_NR(1, 17)
+};
+static int spi_2_cs[] = {IMX_GPIO_NR(1, 31)};
+
+static struct spi_imx_master spi_0_data = {
+	.chipselect = spi_0_cs,
+	.num_chipselect = ARRAY_SIZE(spi_0_cs),
+};
+
+static struct spi_imx_master spi_2_data = {
+	.chipselect = spi_2_cs,
+	.num_chipselect = ARRAY_SIZE(spi_2_cs),
+};
+
+static const struct spi_board_info mx25_spi_board_info[] = {
+	{
+		.name = "m25p80",
+		.max_speed_hz = 10000000,
+		.bus_num = 0,
+		.chip_select = 1,
+	},
+	{
+		.name = "at25x",
+		.max_speed_hz = 10000000,
+		.bus_num = 0,
+		.chip_select = 0,
+		.platform_data = &at25_data,
+	}
+};
 
 static int imx25_mpu_fec_init(void)
 {
@@ -96,9 +136,18 @@ static int imx25_mpu_devices_init(void)
 	if (readl(MX25_CCM_BASE_ADDR + MX25_CCM_RCSR) & (1 << 14))
 		nand_info.width = 2;
 
-    gpio_direction_output(IMX_GPIO_NR(1, 31), 1);
+	gpio_direction_output(IMX_GPIO_NR(1, 17), 1);
+	gpio_direction_output(IMX_GPIO_NR(1, 31), 1);
+	spi_register_board_info(mx25_spi_board_info,
+			ARRAY_SIZE(mx25_spi_board_info));
+	imx25_add_spi0(&spi_0_data);
+	imx25_add_spi2(&spi_2_data);
 
-    armlinux_set_bootparams((void *)0x80000100);
+	devfs_add_partition("m25p0", 0x00000, 0x20000, DEVFS_PARTITION_FIXED, "barebox");
+	devfs_add_partition("m25p0", 0x20000, 0x2a0000, DEVFS_PARTITION_FIXED, "kernel");
+	devfs_add_partition("m25p0", 0x2a0000, 0x100000, DEVFS_PARTITION_FIXED, "firmware");
+
+	armlinux_set_bootparams((void *)0x80000100);
 	armlinux_set_architecture(MACH_TYPE_MX25_3DS);
 	//armlinux_set_architecture(MACH_TYPE_MX25_MPU);
 	armlinux_set_serial(imx_uid());
