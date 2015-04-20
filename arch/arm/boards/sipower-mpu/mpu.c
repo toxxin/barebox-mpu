@@ -39,8 +39,6 @@
 #include <mach/generic.h>
 #include <mach/iim.h>
 #include <linux/err.h>
-#include <i2c/i2c.h>
-#include <mfd/mc34704.h>
 #include <mach/devices-imx25.h>
 #include <asm/barebox-arm-head.h>
 #include <mach/esdctl.h>
@@ -81,7 +79,7 @@ static struct spi_imx_master spi_2_data = {
 static const struct spi_board_info mx25_spi_board_info[] = {
 	{
 		.name = "m25p80",
-		.max_speed_hz = 10000000,
+		.max_speed_hz = 66000000,
 		.bus_num = 0,
 		.chip_select = 1,
 	},

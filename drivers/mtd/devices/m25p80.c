@@ -64,7 +64,7 @@
 #define	SR_SRWD			0x80	/* SR write protect */
 
 /* Define max times to check status register before we give up. */
-#define	MAX_READY_WAIT		40	/* M25P16 specs 40s max chip erase */
+#define	MAX_READY_WAIT		80	/* M25P16 specs 80s max chip erase */
 #define MAX_CMD_SIZE		6
 
 #define JEDEC_MFR(_jedec_id)	((_jedec_id) >> 16)
@@ -744,6 +744,7 @@ static const struct platform_device_id m25p_ids[] = {
 	{ "w25q64", INFO(0xef4017, 0, 64 * 1024, 128, SECT_4K) },
 	{ "w25q80", INFO(0xef5014, 0, 64 * 1024,  16, SECT_4K) },
 	{ "w25q80bl", INFO(0xef4014, 0, 64 * 1024,  16, SECT_4K) },
+	{ "w25q256", INFO(0xef4019, 0, 64 * 1024,  512, SECT_4K) },
 
 	/* Catalyst / On Semiconductor -- non-JEDEC */
 	{ "cat25c11", CAT25_INFO(  16, 8, 16, 1) },
