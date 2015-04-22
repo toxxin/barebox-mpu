@@ -7,7 +7,11 @@ root=net
 uimage=uImage-333
 jffs2=root-pcm043.jffs2
 
+
+
 autoboot_timeout=3
+
+bootargs="console=ttymxc0,115200 noinitrd mtdparts=spi0.0:512k(barebox),4560k(kernel),16256k@128k(firmware) vt.global_cursor_default=0 root=/dev/mtdblock2"
 
 # use 'dhcp' to do dhcp in barebox and in kernel
 #ip=dhcp
