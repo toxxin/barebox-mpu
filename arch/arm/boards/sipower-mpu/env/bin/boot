@@ -9,7 +9,7 @@
 #imx_iim0.permanent_write_enable=0
 
 #erase /dev/m25p0
-#memcpy -d /dev/m25p0 0x80800000 0 8M
+#memcpy -d /dev/m25p0 0x80800000 0 16M
 #reset
 
 if [ x$1 = xnand ]; then
