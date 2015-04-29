@@ -141,8 +141,8 @@ static int imx25_mpu_devices_init(void)
 	imx25_add_spi0(&spi_0_data);
 	imx25_add_spi2(&spi_2_data);
 
-	devfs_add_partition("m25p0", 0x00000, 0x20000, DEVFS_PARTITION_FIXED, "barebox");
-	devfs_add_partition("m25p0", 0x20000, 0x800000, DEVFS_PARTITION_FIXED, "firmware");
+	devfs_add_partition("m25p0", 0x00000, 0x80000, DEVFS_PARTITION_FIXED, "barebox");
+	devfs_add_partition("m25p0", 0x80000, 0x400000, DEVFS_PARTITION_FIXED, "firmware");
 
 	armlinux_set_bootparams((void *)0x80000100);
 	armlinux_set_architecture(MACH_TYPE_MX25_3DS);
