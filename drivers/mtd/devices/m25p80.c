@@ -64,7 +64,7 @@
 #define	SR_SRWD			0x80	/* SR write protect */
 
 /* Define max times to check status register before we give up. */
-#define	MAX_READY_WAIT		80	/* M25P16 specs 80s max chip erase */
+#define	MAX_READY_WAIT		120	/* M25P16 specs 80s max chip erase */
 #define MAX_CMD_SIZE		6
 
 #define JEDEC_MFR(_jedec_id)	((_jedec_id) >> 16)
