@@ -614,6 +614,16 @@ config SIPOWER_MX25_MPU_SDRAM_32MB_SDRAM
 	bool "32 MB (SDR SDRAM)"
 endchoice
 
+choice
+	prompt "FLASH Size"
+config SIPOWER_MX25_MPU_FLASH_8MB
+	bool "8 MB (FLASH)"
+config SIPOWER_MX25_MPU_FLASH_16MB
+	bool "16 MB (FLASH)"
+config SIPOWER_MX25_MPU_FLASH_32MB
+	bool "32 MB (FLASH)"
+endchoice
+
 endif
 
 if MACH_TX53
