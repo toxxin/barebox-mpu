@@ -53,10 +53,10 @@ if [ $kernel = net ]; then
 	if [ x$ip = xdhcp ]; then
 		dhcp
 	fi
-	tftp $uimage uImage-333 || exit 1
+	tftp $uimage || exit 1
 	bootm uImage-333
 elif [ $kernel = nor ]; then
-	bootm /dev/nor0.kernel
+	bootm /dev/firmware
 else
 	bootm /dev/nand0.kernel.bb
 fi
